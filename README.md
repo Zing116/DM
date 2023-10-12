@@ -10,6 +10,6 @@
 [Week4 - Azure 電腦視覺 Part1](https://hackmd.io/@suensummit/ry7Znb2J6#/)  
 [Week5 - 實作：使用LLM](https://hackmd.io/@suensummit/SkVZidce6#/)  
 ## 作業連結區  
-[作業1](https://youtu.be/BtyZ27eXOGU)https://youtu.be/BtyZ27eXOGU 
+[作業1](https://youtu.be/BtyZ27eXOGU)https://youtu.be/BtyZ27eXOGU) 
 
 
