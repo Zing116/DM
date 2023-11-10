@@ -11,5 +11,6 @@
 [Week5 - 實作：使用LLM](https://hackmd.io/@suensummit/SkVZidce6#/)  
 ## 作業連結區  
 [作業1](https://youtu.be/BtyZ27eXOGU)  
+[作業2](https://github.com/Zing116/DM/tree/main/HW2)
 
 
