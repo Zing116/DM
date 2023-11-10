@@ -15,5 +15,5 @@
 ## 作業連結區
 
 [作業 1](https://youtu.be/BtyZ27eXOGU)  
-[作業 2](https://github.com/Zing116/DM/tree/main/HW2)
-[作業 3](https://github.com/Zing116/DM/tree/main/HW3)
+[作業 2](https://github.com/Zing116/DM/tree/main/HW2)  
+[作業 3](https://github.com/Zing116/DM/tree/main/HW3)  
