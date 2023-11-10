@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotel Search</title>
+  </head>
+
+  <body>
+    <h1>Hotel Search</h1>
+    <label for="searchQuery">Search Query:</label>
+    <input type="text" id="searchQuery" /><br />
+    <button id="searchButton">Search Hotels</button>
+    <button id="showAllButton">Show All Hotels</button>
+
+    <div id="searchResults">
+      <h2>Search Results:</h2>
+      <ul id="hotelList"></ul>
+    </div>
+
+    <script>
+      const apiKey = "xznpkfA6xa40PW0iHIglVj6PaNrlR4tQfVbPIB3uNDAzSeDJyTBc";
+      const searchEndpoint =
+        "https://lab3-cognitive-search.search.windows.net/indexes/hotels-sample-index/docs/search?api-version=2023-10-01-Preview";
+      const headers = {
+        "Content-Type": "application/json",
+        "api-key": apiKey,
+      };
+
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", searchHotels);
+      document
+        .getElementById("showAllButton")
+        .addEventListener("click", showAllHotels);
+
+      async function searchHotels() {
+        const searchQuery = document.getElementById("searchQuery").value;
+        const requestData = buildRequestData(searchQuery);
+
+        try {
+          const response = await fetchData(searchEndpoint, requestData);
+
+          if (response.ok) {
+            const hotels = await response.json();
+            displayRandomHotels(hotels);
+          } else {
+            displayError();
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          displayError();
+        }
+      }
+
+      function buildRequestData(searchQuery = "") {
+        const requestData = {
+          count: true,
+          select: "HotelId, HotelName, Description, Category",
+        };
+
+        if (searchQuery) {
+          requestData.search = searchQuery;
+        }
+
+        return requestData;
+      }
+
+      async function fetchData(url, data) {
+        return await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data),
+        });
+      }
+
+      function displayRandomHotels(hotels) {
+        const shuffledHotels = hotels.value.sort(() => 0.5 - Math.random()); // 隨機排序酒店列表
+        const selectedHotels = shuffledHotels.slice(0, 5); // 選取前五間酒店
+
+        const hotelList = document.getElementById("hotelList");
+        hotelList.innerHTML = "";
+
+        selectedHotels.forEach((hotel) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `Hotel ID: ${hotel.HotelId}, Hotel Name: ${hotel.HotelName}, Description: ${hotel.Description}, Category: ${hotel.Category}`;
+          hotelList.appendChild(listItem);
+        });
+      }
+
+      async function showAllHotels() {
+        const requestData = buildRequestData();
+
+        try {
+          const response = await fetchData(searchEndpoint, requestData);
+
+          if (response.ok) {
+            const hotels = await response.json();
+            displayHotels(hotels);
+          } else {
+            displayError();
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          displayError();
+        }
+      }
+
+      function displayHotels(hotels) {
+        const hotelList = document.getElementById("hotelList");
+        hotelList.innerHTML = "";
+
+        hotels.value.forEach((hotel) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `Hotel ID: ${hotel.HotelId}, Hotel Name: ${hotel.HotelName}, Description: ${hotel.Description}, Category: ${hotel.Category}`;
+          hotelList.appendChild(listItem);
+        });
+      }
+
+      function displayError() {
+        alert("Failed to fetch search results. Please try again.");
+      }
+    </script>
+  </body>
+</html>
